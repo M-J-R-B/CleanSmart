@@ -45,6 +45,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @cleansmart/db prisma:migrate:deploy
       - run: pnpm --filter @cleansmart/db prisma:generate
+      - run: pnpm --filter @cleansmart/db --filter @cleansmart/shared build
       - run: pnpm typecheck
       - run: pnpm lint
       - run: pnpm test
