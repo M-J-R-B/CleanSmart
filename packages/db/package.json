@@ -1,0 +1,23 @@
+{
+  "name": "@cleansmart/db",
+  "version": "0.0.1",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "lint": "eslint src --ext .ts",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "prisma:studio": "prisma studio"
+  },
+  "dependencies": {
+    "@prisma/client": "5.13.0"
+  },
+  "devDependencies": {
+    "prisma": "5.13.0"
+  }
+}
