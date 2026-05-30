@@ -1,0 +1,23 @@
+{
+  "name": "@cleansmart/api",
+  "version": "0.0.1",
+  "private": true,
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "test": "vitest run",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "@cleansmart/db": "workspace:*",
+    "@cleansmart/shared": "workspace:*",
+    "@sentry/node": "7.112.0",
+    "bullmq": "5.7.4",
+    "dotenv": "16.4.5",
+    "fastify": "4.26.2",
+    "ioredis": "5.4.1"
+  }
+}
