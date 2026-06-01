@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, afterAll, vi } from "vitest";
+import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { createHmac } from "node:crypto";
 import { buildApp } from "../../app";
 import { buildContainer } from "../../container";
