@@ -33,6 +33,14 @@ jobs:
       DATABASE_URL: postgresql://cleansmart:cleansmart@localhost:5432/cleansmart_test?schema=public
       REDIS_URL: redis://localhost:6379
       PORT: 3000
+      JWT_ACCESS_SECRET: test-access-secret-must-be-32-plus-chars-long-yep
+      JWT_REFRESH_SECRET: test-refresh-secret-must-be-32-plus-chars-different
+      ACCESS_TOKEN_TTL_SECONDS: 900
+      REFRESH_TOKEN_TTL_SECONDS: 2592000
+      TWILIO_ACCOUNT_SID: ACtestaccountsid
+      TWILIO_AUTH_TOKEN: testauthtoken12345
+      TWILIO_VERIFY_SERVICE_SID: VAtestverifysid
+      PERSONA_WEBHOOK_SECRET: testsecret
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
