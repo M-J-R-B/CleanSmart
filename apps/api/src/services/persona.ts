@@ -28,3 +28,28 @@ export function parsePersonaEvent(body: any): PersonaInquiryEvent | null {
     eventName: attrs.name,
   };
 }
+
+export interface PersonaClient {
+  createInquiry(referenceId: string): Promise<{ inquiryId: string; sessionToken: string }>;
+}
+
+export function createPersonaClient(apiKey: string, templateId: string): PersonaClient {
+  return {
+    async createInquiry(referenceId) {
+      const res = await fetch("https://withpersona.com/api/v1/inquiries", {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${apiKey}`,
+          "content-type": "application/json",
+          "persona-version": "2023-01-05",
+        },
+        body: JSON.stringify({
+          data: { attributes: { "inquiry-template-id": templateId, "reference-id": referenceId } },
+        }),
+      });
+      if (!res.ok) throw new Error(`Persona inquiry failed: ${res.status}`);
+      const json = (await res.json()) as { data: { id: string; attributes: { "session-token": string } } };
+      return { inquiryId: json.data.id, sessionToken: json.data.attributes["session-token"] };
+    },
+  };
+}

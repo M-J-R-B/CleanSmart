@@ -75,4 +75,13 @@ describe("/me", () => {
     });
     expect(res.statusCode).toBe(403);
   });
+
+  it("POST /me/worker/persona returns 503 when not configured", async () => {
+    const res = await app.inject({
+      method: "POST",
+      url: "/me/worker/persona",
+      headers: { authorization: `Bearer ${workerToken}` },
+    });
+    expect(res.statusCode).toBe(503);
+  });
 });

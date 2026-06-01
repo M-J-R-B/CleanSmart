@@ -37,4 +37,15 @@ export async function meRoutes(app: FastifyInstance) {
     const body = UpdateClientSchema.parse(req.body);
     return prisma.clientProfile.update({ where: { userId: req.userId! }, data: body });
   });
+
+  app.post("/me/worker/persona", { preHandler: [requireAuth, requireRole("worker")] }, async (req, reply) => {
+    const persona = app.container.persona;
+    if (!persona) return reply.status(503).send({ error: { code: "persona_unavailable", message: "ID verification not configured" } });
+    const result = await persona.createInquiry(req.userId!);
+    await prisma.workerProfile.update({
+      where: { userId: req.userId! },
+      data: { personaInquiryId: result.inquiryId },
+    });
+    return result;
+  });
 }

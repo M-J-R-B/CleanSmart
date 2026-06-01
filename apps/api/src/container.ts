@@ -4,6 +4,7 @@ import { getPrisma, type PrismaClient } from "@cleansmart/db";
 import { parseEnv, type Env } from "@cleansmart/shared";
 import { createOtpService, type OtpService } from "./services/otp";
 import { createTokenService, type TokenService } from "./services/tokens";
+import { createPersonaClient, type PersonaClient } from "./services/persona";
 
 export interface Container {
   env: Env;
@@ -11,6 +12,7 @@ export interface Container {
   redis: IORedis;
   otp: OtpService;
   tokens: TokenService;
+  persona: PersonaClient | null;
 }
 
 export function buildContainer(env: Env = parseEnv(process.env)): Container {
@@ -24,5 +26,8 @@ export function buildContainer(env: Env = parseEnv(process.env)): Container {
     accessTtlSeconds: env.ACCESS_TOKEN_TTL_SECONDS,
     refreshTtlSeconds: env.REFRESH_TOKEN_TTL_SECONDS,
   });
-  return { env, prisma, redis, otp, tokens };
+  const persona = env.PERSONA_API_KEY && env.PERSONA_TEMPLATE_ID
+    ? createPersonaClient(env.PERSONA_API_KEY, env.PERSONA_TEMPLATE_ID)
+    : null;
+  return { env, prisma, redis, otp, tokens, persona };
 }
