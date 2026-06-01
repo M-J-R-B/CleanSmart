@@ -15,9 +15,16 @@
     "@cleansmart/db": "workspace:*",
     "@cleansmart/shared": "workspace:*",
     "@sentry/node": "7.112.0",
+    "argon2": "0.40.1",
     "bullmq": "5.7.4",
     "dotenv": "16.4.5",
     "fastify": "4.26.2",
-    "ioredis": "5.4.1"
+    "fastify-raw-body": "4.3.0",
+    "ioredis": "5.4.1",
+    "jsonwebtoken": "9.0.2",
+    "twilio": "5.0.3"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "9.0.6"
   }
 }
