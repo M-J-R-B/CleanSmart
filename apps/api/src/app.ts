@@ -1,6 +1,7 @@
 import Fastify, { FastifyInstance } from "fastify";
 import { healthRoutes } from "./routes/health";
 import { authRoutes } from "./routes/auth";
+import { meRoutes } from "./routes/me";
 import { buildContainer, type Container } from "./container";
 
 export function buildApp(container: Container = buildContainer()): FastifyInstance {
@@ -8,6 +9,7 @@ export function buildApp(container: Container = buildContainer()): FastifyInstan
   app.decorate("container", container);
   app.register(healthRoutes);
   app.register(authRoutes, { prefix: "/auth" });
+  app.register(meRoutes);
   return app;
 }
 
